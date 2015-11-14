@@ -7,7 +7,9 @@ buildscript {
         }
     }
     dependencies {
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.1'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
     }
 }
 
@@ -16,7 +18,7 @@ allprojects {
     apply plugin: 'jacoco'
     apply plugin: 'com.github.kt3k.coveralls'
 
-    group 'de.qaware.chronix.api'
+    group 'de.qaware.chronix'
 
     repositories {
         jcenter()
@@ -37,6 +39,9 @@ subprojects {
     apply plugin: 'base'
     apply plugin: 'groovy'
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.gradle.plugin-publish'
+    apply plugin: 'com.jfrog.bintray'
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8

@@ -3,8 +3,23 @@
 [![Stories in Ready](https://badge.waffle.io/ChronixDB/chronix.api.png?label=ready&title=Ready)](https://waffle.io/ChronixDB/chronix.api)
 [![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](https://github.com/ChronixDB/chronix.api/blob/master/LICENSE)
 
-# chronix.api
-The chronix api package.
+# Chronix API
+The Chronix API defines the Chronix Client class that allows one to stream and store data. 
+The Chronix Server and the Chronix Storage provides an implementation that is used by the Chronix Client 
+
+## Usage
+Build script snippet for use in all Gradle versions, using the Bintray Maven repository:
+
+```groovy
+    repositories {
+        mavenCentral()
+            maven { url "http://dl.bintray.com/chronix/maven" }
+        }
+    dependencies {
+         compile 'de.qaware.chronix:chronix-api:0.0.1'
+    }
+}
+```
 
 ## Contributing
 
