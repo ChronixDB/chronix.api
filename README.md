@@ -5,19 +5,18 @@
 
 # Chronix API
 The Chronix API defines the Chronix Client class that allows one to stream and store data. 
-The Chronix Server and the Chronix Storage provides an implementation that is used by the Chronix Client 
+The Chronix Server and the Chronix Storage provides an implementation that is used by the Chronix Client. 
 
 ## Usage
 Build script snippet for use in all Gradle versions, using the Bintray Maven repository:
 
 ```groovy
-    repositories {
-        mavenCentral()
-            maven { url "http://dl.bintray.com/chronix/maven" }
-        }
-    dependencies {
-         compile 'de.qaware.chronix:chronix-api:0.0.1'
-    }
+repositories {
+    mavenCentral()
+        maven { url "http://dl.bintray.com/chronix/maven" }
+}
+dependencies {
+   compile 'de.qaware.chronix:chronix-api:0.0.1'
 }
 ```
 
