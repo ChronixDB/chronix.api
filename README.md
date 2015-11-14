@@ -13,7 +13,9 @@ Build script snippet for use in all Gradle versions, using the Bintray Maven rep
 ```groovy
 repositories {
     mavenCentral()
-        maven { url "http://dl.bintray.com/chronix/maven" }
+    maven { 
+        url "http://dl.bintray.com/chronix/maven" 
+    }
 }
 dependencies {
    compile 'de.qaware.chronix:chronix-api:0.0.1'
