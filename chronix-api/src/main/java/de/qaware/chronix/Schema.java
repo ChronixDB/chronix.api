@@ -42,6 +42,11 @@ public class Schema {
     public static final String END = "end";
 
     /**
+     * The metric field
+     */
+    public static final String METRIC = "metric";
+
+    /**
      * Private constructor
      */
     private Schema() {
@@ -55,7 +60,7 @@ public class Schema {
      * @return true if the field is not one of the four required fields, otherwise false.
      */
     public static boolean isUserDefined(String field) {
-        return !(field.equals(ID) || field.equals(DATA) || field.equals(START) || field.equals(END));
+        return !(field.equals(ID) || field.equals(DATA) || field.equals(START) || field.equals(END) || field.equals(METRIC));
     }
 
 }

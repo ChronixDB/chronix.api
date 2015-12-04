@@ -13,12 +13,10 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package de.qaware.chronix.converter
+package de.qaware.chronix
 
-import de.qaware.chronix.Schema
 import spock.lang.Specification
 import spock.lang.Unroll
-
 /**
  * Unit test for the schema class
  *
@@ -43,8 +41,8 @@ class SchemaTest extends Specification {
         result == expected
 
         where:
-        field << ["data", "id", "start", "end", "user-defined"]
-        expected << [false, false, false, false, true]
+        field << ["data", "id", "start", "end", "metric", "user-defined"]
+        expected << [false, false, false, false, false, true]
 
     }
 
