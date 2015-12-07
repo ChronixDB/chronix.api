@@ -15,7 +15,8 @@
  */
 package de.qaware.chronix
 
-import de.qaware.chronix.converter.DocumentConverter
+import de.qaware.chronix.converter.BinaryTimeSeries
+import de.qaware.chronix.converter.TimeSeriesConverter
 import de.qaware.chronix.streaming.StorageService
 import spock.lang.Specification
 
@@ -26,25 +27,25 @@ import spock.lang.Specification
 class ChronixClientTest extends Specification {
     def "test stream"() {
         given:
-        def converter = Mock(DocumentConverter.class)
+        def converter = Mock(TimeSeriesConverter.class)
         def service = Mock(StorageService.class)
 
         def connection = Mock(Object.class)
         def query = Mock(Object.class)
 
-        ChronixClient client = new ChronixClient(converter, service)
-        when:
+        ChronixClient<BinaryTimeSeries, Object, Object> client = new ChronixClient<>(converter, service)
 
-        client.stream(connection, query, 0, 1, 200)
+        when:
+        client.stream(connection, query)
 
         then:
-        1 * service.stream(_, _, _, _, _, _)
+        1 * service.stream(_, _, _)
 
     }
 
     def "test add"() {
         given:
-        def converter = Mock(DocumentConverter.class)
+        def converter = Mock(TimeSeriesConverter.class)
         def service = Mock(StorageService.class)
         def connection = Mock(Object.class)
 

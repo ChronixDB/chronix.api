@@ -15,40 +15,39 @@
  */
 package de.qaware.chronix.streaming;
 
-import de.qaware.chronix.converter.DocumentConverter;
+import de.qaware.chronix.converter.TimeSeriesConverter;
 
 import java.util.Collection;
 import java.util.stream.Stream;
 
 /**
- * The storage access to stream and add documents
+ * The storage access to stream and add time series
  *
- * @param <T> - the type of the document returned or added
+ * @param <T> - the type of the time series returned or added
  * @param <C> - the connection type
  * @param <Q> - the query type used by the connection
  * @author f.lautenschlager
  */
 public interface StorageService<T, C, Q> {
     /**
-     * Streams documents of type <T> from the given connection using the given query.
+     * Streams time series of type <T> from the given connection using the given query.
      *
-     * @param converter             - defines how the documents of type <T> are created
-     * @param connection            - the connection to the storage
-     * @param query                 - the query that describe the result
-     * @param queryStart            - the start of the query range
-     * @param queryEnd              - the end of the query range
-     * @param nrOfDocumentsPerBatch - number of documents that are processed in a batch
+     * @param converter  - defines how the time series of type <T> are created
+     * @param connection - the connection to the storage
+     * @param query      - the query that describe the result
      * @return an iterator on the result set
      */
-    Stream<T> stream(DocumentConverter<T> converter, C connection, Q query, long queryStart, long queryEnd, int nrOfDocumentsPerBatch);
+    Stream<T> stream(TimeSeriesConverter<T> converter, C connection, Q query);
 
     /**
-     * @param converter  - the converter for the documents
-     * @param documents  - the documents added to the connection
-     * @param connection - the connection to the data source
-     * @return true if the documents are added correctly, otherwise false
+     * Adds the given collection of time series to the storage
+     *
+     * @param converter  - the converter for the time series
+     * @param documents  - the time series added to the storage
+     * @param connection - the connection to the storage
+     * @return true if the time series are added correctly, otherwise false
      */
-    boolean add(DocumentConverter<T> converter, Collection<T> documents, C connection);
+    boolean add(TimeSeriesConverter<T> converter, Collection<T> documents, C connection);
 
 
 }

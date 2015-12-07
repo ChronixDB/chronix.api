@@ -16,17 +16,13 @@
 package de.qaware.chronix;
 
 
-import de.qaware.chronix.converter.DocumentConverter;
+import de.qaware.chronix.converter.TimeSeriesConverter;
 import de.qaware.chronix.streaming.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.Spliterators;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * The Chronix client to stream and add time series
@@ -40,17 +36,17 @@ public class ChronixClient<T, C, Q> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChronixClient.class);
 
-    private final DocumentConverter<T> converter;
+    private final TimeSeriesConverter<T> converter;
     private final StorageService<T, C, Q> service;
 
 
     /**
      * Creates a chronix client.
      *
-     * @param converter - the converter to handle the documents
+     * @param converter - the converter to handle the time series
      * @param service   - the service for accessing the storage
      */
-    public ChronixClient(DocumentConverter<T> converter, StorageService<T, C, Q> service) {
+    public ChronixClient(TimeSeriesConverter<T> converter, StorageService<T, C, Q> service) {
         this.converter = converter;
         this.service = service;
         LOGGER.debug("Creating ChronixClient with Converter {} for Storage {}", converter, service);
@@ -59,20 +55,17 @@ public class ChronixClient<T, C, Q> {
     /**
      * Creates a stream of time series for the given query context and the connection
      *
-     * @param connection            - the connection to the storage
-     * @param query                 - the query used by the connection
-     * @param queryStart            - the start time range of the query
-     * @param queryEnd              - the end time range of the query
-     * @param nrOfDocumentsPerBatch - number of documents that are processed at once
+     * @param connection - the connection to the storage
+     * @param query      - the query used by the connection
      * @return a stream of time series
      */
-    public Stream<T> stream(C connection, Q query, long queryStart, long queryEnd, int nrOfDocumentsPerBatch) {
-        LOGGER.debug("Streaming documents from {} with query {}, starting at {}, stopping at {}, number of documents per batch {]", connection, query, queryStart, queryEnd, nrOfDocumentsPerBatch);
-        return service.stream(converter, connection, query, queryStart, queryEnd, nrOfDocumentsPerBatch);
+    public Stream<T> stream(C connection, Q query) {
+        LOGGER.debug("Streaming time series from {} with query {}", connection, query);
+        return service.stream(converter, connection, query);
     }
 
     /**
-     * Add the given documents to the given connection.
+     * Add the given time series to the given connection.
      * Note that the connection is responsible for the commit.
      *
      * @param timeSeries - the time series of type <T> that should stored

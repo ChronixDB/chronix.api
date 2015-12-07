@@ -23,12 +23,12 @@ import java.time.Instant
  * Tests the creation of a binary storage document
  * @author f.lautenschlager
  */
-class BinaryStorageDocumentTest extends Specification {
+class BinaryTimeSeriesTest extends Specification {
 
     def "test creation of a binary storage document"() {
 
         given:
-        def builder = new BinaryStorageDocument.Builder();
+        def builder = new BinaryTimeSeries.Builder();
         def start = Instant.now().toEpochMilli()
         def end = Instant.now().plusSeconds(64000).toEpochMilli()
 
@@ -49,7 +49,7 @@ class BinaryStorageDocumentTest extends Specification {
         binaryDocument.getId() == "6525-9662-2342"
         binaryDocument.getStart() == start
         binaryDocument.getEnd() == end
-        binaryDocument.getData() == "The-Binary-Large-Object".getBytes()
+        binaryDocument.getPoints() == "The-Binary-Large-Object".getBytes()
         binaryDocument.get("host") == "myProductionHost"
         binaryDocument.get("size") == 0
 

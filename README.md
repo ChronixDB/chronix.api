@@ -18,7 +18,7 @@ repositories {
     }
 }
 dependencies {
-   compile 'de.qaware.chronix:chronix-api:0.0.1'
+   compile 'de.qaware.chronix:chronix-api:0.0.2'
 }
 ```
 

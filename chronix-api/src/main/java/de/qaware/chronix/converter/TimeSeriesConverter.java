@@ -16,38 +16,33 @@
 package de.qaware.chronix.converter;
 
 /**
- * Defines how a custom document of type <T> is converted from a binary storage document and back
+ * Defines how a custom time series of type <T> is converted from a binary time series and back
  *
  * @param <T> type of the document returned by the converter
  * @author f.lautenschlager
  */
-public interface DocumentConverter<T> {
+public interface TimeSeriesConverter<T> {
 
     /**
      * Shall create an object of type T from the given time series document.
      * <p>
-     * The time series document contains all stored fields in the Solr index.
-     * This method is executed in worker thread and should handle the complete transformation into
+     * The time series contains all fields.
+     * This method is executed in worker thread and should handle the transformation into
      * a user custom time series object.
      *
-     * @param binaryStorageDocument - the time series document containing all stored fields and values
-     * @param queryStart            - the start of the query
-     * @param queryEnd              - the end of the query
+     * @param binaryTimeSeries - the time series document containing all stored fields and values
+     * @param queryStart       - the start of the query
+     * @param queryEnd         - the end of the query
      * @return a concrete object of type T
      */
-    T from(BinaryStorageDocument binaryStorageDocument, long queryStart, long queryEnd);
+    T from(BinaryTimeSeries binaryTimeSeries, long queryStart, long queryEnd);
 
     /**
-     * Shall do the conversation of the custom T into the TimeSeriesDocument that is stored.
-     * The values should be in a string or a numerical representation.
-     * <code>
-     * put("FieldName","String-Value")
-     * put("FieldName",478)
-     * </code>
+     * Shall do the conversation of the custom time series T into the binary time series that is stored.
      *
      * @param document - the custom time series with all fields
      * @return the time series document that is stored
      */
-    BinaryStorageDocument to(T document);
+    BinaryTimeSeries to(T document);
 
 }

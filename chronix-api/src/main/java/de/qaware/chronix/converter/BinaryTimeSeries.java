@@ -21,12 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The binary storage document contains at least the required fields (id, start,end,data)
- * and an arbitrary list of fields
+ * The binary time series contains at least the required fields (id, start,end,data)
+ * and an arbitrary list of fields.
+ * The data field is a binary large object.
  *
  * @author f.lautenschlager
  */
-public class BinaryStorageDocument {
+public class BinaryTimeSeries {
 
     /**
      * The fields of the time series
@@ -36,7 +37,7 @@ public class BinaryStorageDocument {
     /**
      * Default constructor
      */
-    private BinaryStorageDocument() {
+    private BinaryTimeSeries() {
     }
 
     /**
@@ -83,16 +84,16 @@ public class BinaryStorageDocument {
     }
 
     /**
-     * @return the binary data of this document
+     * @return the binary encoded points
      */
-    public byte[] getData() {
+    public byte[] getPoints() {
         return (byte[]) fields.getOrDefault(Schema.DATA, new byte[]{});
     }
 
     /**
-     * @param blob - the binary large object containing the data
+     * @param blob - the binary large object containing the points
      */
-    private void setData(byte[] blob) {
+    private void setPoints(byte[] blob) {
         fields.put(Schema.DATA, blob);
     }
 
@@ -133,21 +134,21 @@ public class BinaryStorageDocument {
         /**
          * The time series object
          */
-        private BinaryStorageDocument binaryStorageDocument;
+        private BinaryTimeSeries binaryTimeSeries;
 
         /**
          * Constructs a new Builder
          */
         public Builder() {
-            binaryStorageDocument = new BinaryStorageDocument();
+            binaryTimeSeries = new BinaryTimeSeries();
         }
 
 
         /**
          * @return the filled time series
          */
-        public BinaryStorageDocument build() {
-            return binaryStorageDocument;
+        public BinaryTimeSeries build() {
+            return binaryTimeSeries;
         }
 
         /**
@@ -158,7 +159,7 @@ public class BinaryStorageDocument {
          * @return the builder
          */
         public Builder field(String field, Object value) {
-            binaryStorageDocument.put(field, value);
+            binaryTimeSeries.put(field, value);
             return this;
         }
 
@@ -170,7 +171,7 @@ public class BinaryStorageDocument {
          * @return the builder
          */
         public Builder data(byte[] blob) {
-            binaryStorageDocument.setData(blob);
+            binaryTimeSeries.setPoints(blob);
             return this;
         }
 
@@ -181,7 +182,7 @@ public class BinaryStorageDocument {
          * @return the builder
          */
         public Builder start(long start) {
-            binaryStorageDocument.setStart(start);
+            binaryTimeSeries.setStart(start);
             return this;
         }
 
@@ -192,18 +193,18 @@ public class BinaryStorageDocument {
          * @return the builder
          */
         public Builder end(long end) {
-            binaryStorageDocument.setEnd(end);
+            binaryTimeSeries.setEnd(end);
             return this;
         }
 
         /**
-         * Sets the id of this time series. If no id is set, Solr sets the id on document commit
+         * Sets the id of this time series. If no id is set, Solr sets the id on the commit
          *
          * @param guid - the guid as string representation
          * @return the builder
          */
         public Builder id(String guid) {
-            binaryStorageDocument.setId(guid);
+            binaryTimeSeries.setId(guid);
             return this;
         }
     }
