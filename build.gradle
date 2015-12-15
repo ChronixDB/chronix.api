@@ -1,3 +1,22 @@
+/*
+ *    Copyright (C) 2015 QAware GmbH
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+//Sonar plugin at the root
+apply plugin: "sonar-runner"
+
 buildscript {
     repositories {
         jcenter()
@@ -46,10 +65,16 @@ subprojects {
     apply plugin: 'com.github.hierynomus.license'
 
     license {
-        includes(["**/*.java", "**/*.groovy"])
+        includes(["**/*.java", "**/*.groovy", "**/*.gradle"])
         mapping {
             java = 'SLASHSTAR_STYLE'
             groovy = 'SLASHSTAR_STYLE'
+        }
+    }
+
+    sonarRunner {
+        sonarProperties {
+            property "sonar.sourceEncoding", "UTF-8"
         }
     }
 
@@ -136,5 +161,24 @@ tasks.coveralls {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
+}
+
+sonarRunner {
+    def sonarUser = project.hasProperty('sonarUser') ? project.sonarUser : 'unknown'
+    def sonarPw = project.hasProperty('sonarPW') ? project.sonarPW : 'unknown'
+
+    def jdbcUser = project.hasProperty('jdbcUser') ? project.jdbcUser : 'unknown'
+    def jdbcPw = project.hasProperty('jdbcPW') ? project.jdbcPW : 'unknown'
+
+    sonarProperties {
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.host.url", "https://www.qaware.de/sonar"
+        property "sonar.login", "$sonarUser"
+        property "sonar.password", "$sonarPw"
+        property "sonar.jdbc.url", "jdbc:mysql://nio-prj-2.intern.qaware.de:3306/sonardb?useUnicode=true&characterEncoding=utf8"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "$jdbcUser"
+        property "sonar.jdbc.password", "$jdbcPw"
+    }
 }
 
