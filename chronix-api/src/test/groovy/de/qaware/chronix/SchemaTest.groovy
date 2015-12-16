@@ -17,6 +17,7 @@ package de.qaware.chronix
 
 import spock.lang.Specification
 import spock.lang.Unroll
+
 /**
  * Unit test for the schema class
  *
@@ -41,8 +42,8 @@ class SchemaTest extends Specification {
         result == expected
 
         where:
-        field << ["data", "id", "start", "end", "metric", "user-defined"]
-        expected << [false, false, false, false, false, true]
+        field << ["data", "id", "start", "end", "user-defined"]
+        expected << [false, false, false, false, true]
 
     }
 
