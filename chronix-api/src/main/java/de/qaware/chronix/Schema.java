@@ -21,7 +21,7 @@ package de.qaware.chronix;
  *
  * @author f.lautenschlager
  */
-public class Schema {
+public final class Schema {
 
     /**
      * The Constant IDX_ID

@@ -27,7 +27,7 @@ import java.util.Map;
  *
  * @author f.lautenschlager
  */
-public class BinaryTimeSeries {
+public final class BinaryTimeSeries {
 
     /**
      * The fields of the time series
