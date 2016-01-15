@@ -165,10 +165,10 @@ task wrapper(type: Wrapper) {
 
 sonarRunner {
     def sonarUser = project.hasProperty('sonarUser') ? project.sonarUser : 'unknown'
-    def sonarPw = project.hasProperty('sonarPW') ? project.sonarPW : 'unknown'
+    def sonarPw = project.hasProperty('sonarPw') ? project.sonarPw : 'unknown'
 
     def jdbcUser = project.hasProperty('jdbcUser') ? project.jdbcUser : 'unknown'
-    def jdbcPw = project.hasProperty('jdbcPW') ? project.jdbcPW : 'unknown'
+    def jdbcPw = project.hasProperty('jdbcPw') ? project.jdbcPw : 'unknown'
 
     sonarProperties {
         property "sonar.sourceEncoding", "UTF-8"
