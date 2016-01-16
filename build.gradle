@@ -160,7 +160,7 @@ tasks.coveralls {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+    gradleVersion = '2.4'
 }
 
 sonarRunner {
@@ -181,6 +181,7 @@ sonarRunner {
         property "sonar.jdbc.password", "$jdbcPw"
         property "sonar.projectName", "ChronixDB-API"
         property "sonar.projectKey", "de.qaware.chronix:chronix-api"
+        property "sonar.projectVersion","$project.version"
     }
 }
 
