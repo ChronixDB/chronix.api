@@ -34,6 +34,7 @@ buildscript {
 }
 
 allprojects {
+    version '0.1.1'
 
     apply plugin: 'jacoco'
     apply plugin: 'com.github.kt3k.coveralls'
