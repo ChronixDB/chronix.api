@@ -41,7 +41,7 @@ public class ChronixClient<T, C, Q> {
 
 
     /**
-     * Creates a chronix client.
+     * Creates a Chronix client.
      *
      * @param converter - the converter to handle the time series
      * @param service   - the service for accessing the storage
@@ -65,7 +65,7 @@ public class ChronixClient<T, C, Q> {
     }
 
     /**
-     * Add the given time series to the given connection.
+     * Adds the given time series to the given connection.
      * Note that the connection is responsible for the commit.
      *
      * @param timeSeries - the time series of type <T> that should stored

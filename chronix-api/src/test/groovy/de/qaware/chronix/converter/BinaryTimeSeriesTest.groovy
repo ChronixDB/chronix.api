@@ -33,7 +33,7 @@ class BinaryTimeSeriesTest extends Specification {
         def end = Instant.now().plusSeconds(64000).toEpochMilli()
 
         when:
-        def binaryDocument = builder
+        def binaryTimeSeries = builder
                 .id("6525-9662-2342")
                 .start(start)
                 .end(end)
@@ -43,15 +43,15 @@ class BinaryTimeSeriesTest extends Specification {
                 .build()
 
         then:
-        binaryDocument != null
-        binaryDocument.getFields().size() == 6
+        binaryTimeSeries != null
+        binaryTimeSeries.getFields().size() == 6
 
-        binaryDocument.getId() == "6525-9662-2342"
-        binaryDocument.getStart() == start
-        binaryDocument.getEnd() == end
-        binaryDocument.getPoints() == "The-Binary-Large-Object".getBytes()
-        binaryDocument.get("host") == "myProductionHost"
-        binaryDocument.get("size") == 0
+        binaryTimeSeries.getId() == "6525-9662-2342"
+        binaryTimeSeries.getStart() == start
+        binaryTimeSeries.getEnd() == end
+        binaryTimeSeries.getPoints() == "The-Binary-Large-Object".getBytes()
+        binaryTimeSeries.get("host") == "myProductionHost"
+        binaryTimeSeries.get("size") == 0
 
     }
 }
