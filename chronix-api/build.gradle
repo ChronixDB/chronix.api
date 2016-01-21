@@ -14,6 +14,11 @@
  *    limitations under the License.
  */
 
+sonarqube {
+    properties {
+        property "sonar.projectName", "de.qaware.chronix:chronix-api"
+    }
+}
 
 task copyTestResources(type: Copy) {
     from "${projectDir}/src/test/resources"

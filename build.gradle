@@ -14,6 +14,32 @@
  *    limitations under the License.
  */
 
+
+apply plugin: 'org.sonarqube'
+
+
+sonarqube {
+    def sonarUser = project.hasProperty('sonarUser') ? project.sonarUser : 'unknown'
+    def sonarPw = project.hasProperty('sonarPw') ? project.sonarPw : 'unknown'
+
+    def jdbcUser = project.hasProperty('jdbcUser') ? project.jdbcUser : 'unknown'
+    def jdbcPw = project.hasProperty('jdbcPw') ? project.jdbcPw : 'unknown'
+
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.host.url", "https://www.qaware.de/sonar"
+        property "sonar.login", "$sonarUser"
+        property "sonar.password", "$sonarPw"
+        property "sonar.jdbc.url", "jdbc:mysql://nio-prj-2.intern.qaware.de:3306/sonardb?useUnicode=true&characterEncoding=utf8"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "$jdbcUser"
+        property "sonar.jdbc.password", "$jdbcPw"
+        property "sonar.projectName", "ChronixDB-API"
+        property "sonar.projectKey", "de.qaware.chronix:chronix.api"
+        property "sonar.projectVersion","$project.version"
+    }
+}
+
 buildscript {
     repositories {
         jcenter()
@@ -27,15 +53,9 @@ buildscript {
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
         classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+        classpath 'org.sonarqube.gradle:gradle-sonarqube-plugin:1.0'
     }
 }
-
-plugins {
-    id "org.sonarqube" version "1.2"
-}
-
-//Sonar plugin at the root
-apply plugin: 'org.sonarqube'
 
 allprojects {
     version '0.1.1'
@@ -78,7 +98,6 @@ subprojects {
     sonarqube {
         properties {
             property "sonar.sourceEncoding", "UTF-8"
-            property "sonar.sources", "src"
         }
     }
 
@@ -164,28 +183,5 @@ tasks.coveralls {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
+    gradleVersion = '2.10'
 }
-
-sonarqube {
-    def sonarUser = project.hasProperty('sonarUser') ? project.sonarUser : 'unknown'
-    def sonarPw = project.hasProperty('sonarPw') ? project.sonarPw : 'unknown'
-
-    def jdbcUser = project.hasProperty('jdbcUser') ? project.jdbcUser : 'unknown'
-    def jdbcPw = project.hasProperty('jdbcPw') ? project.jdbcPw : 'unknown'
-
-    properties {
-        property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.host.url", "https://www.qaware.de/sonar"
-        property "sonar.login", "$sonarUser"
-        property "sonar.password", "$sonarPw"
-        property "sonar.jdbc.url", "jdbc:mysql://nio-prj-2.intern.qaware.de:3306/sonardb?useUnicode=true&characterEncoding=utf8"
-        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
-        property "sonar.jdbc.username", "$jdbcUser"
-        property "sonar.jdbc.password", "$jdbcPw"
-        property "sonar.projectName", "ChronixDB-API"
-        property "sonar.projectKey", "de.qaware.chronix:chronix-api"
-        property "sonar.projectVersion","$project.version"
-    }
-}
-
