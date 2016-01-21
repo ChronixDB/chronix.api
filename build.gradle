@@ -14,9 +14,6 @@
  *    limitations under the License.
  */
 
-//Sonar plugin at the root
-apply plugin: "sonar-runner"
-
 buildscript {
     repositories {
         jcenter()
@@ -32,6 +29,13 @@ buildscript {
         classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
     }
 }
+
+plugins {
+    id "org.sonarqube" version "1.2"
+}
+
+//Sonar plugin at the root
+apply plugin: 'org.sonarqube'
 
 allprojects {
     version '0.1.1'
@@ -71,8 +75,8 @@ subprojects {
         }
     }
 
-    sonarRunner {
-        sonarProperties {
+    sonarqube {
+        properties {
             property "sonar.sourceEncoding", "UTF-8"
         }
     }
@@ -162,14 +166,14 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
 }
 
-sonarRunner {
+sonarqube {
     def sonarUser = project.hasProperty('sonarUser') ? project.sonarUser : 'unknown'
     def sonarPw = project.hasProperty('sonarPw') ? project.sonarPw : 'unknown'
 
     def jdbcUser = project.hasProperty('jdbcUser') ? project.jdbcUser : 'unknown'
     def jdbcPw = project.hasProperty('jdbcPw') ? project.jdbcPw : 'unknown'
 
-    sonarProperties {
+    properties {
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.host.url", "https://www.qaware.de/sonar"
         property "sonar.login", "$sonarUser"
