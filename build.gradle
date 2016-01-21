@@ -54,7 +54,7 @@ sonarqube {
         property "sonar.jdbc.username", "$jdbcUser"
         property "sonar.jdbc.password", "$jdbcPw"
         property "sonar.projectName", "ChronixDB-API"
-        property "sonar.projectKey", "de.qaware.chronix:chronix.api"
+        property "sonar.projectKey", "de.qaware.chronix:chronix-api-root"
         property "sonar.projectVersion","$project.version"
     }
 }
