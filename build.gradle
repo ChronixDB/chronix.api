@@ -53,7 +53,7 @@ sonarqube {
         property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
         property "sonar.jdbc.username", "$jdbcUser"
         property "sonar.jdbc.password", "$jdbcPw"
-        property "sonar.projectName", "ChronixDB-API"
+        property "sonar.projectName", "ChronixDB"
         property "sonar.projectKey", "de.qaware.chronix:chronix"
         property "sonar.projectVersion","$project.version"
     }
