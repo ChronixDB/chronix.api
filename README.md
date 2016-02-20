@@ -34,8 +34,7 @@ public class ChronixClient<T, C, Q> {..}
 */
 public ChronixClient(TimeSeriesConverter<T> converter, StorageService<T, C, Q> service) {
 ```
-
-### Stream time series from the storage
+### Add time series to the storage
 ```java
 /**
 * Adds the given time series to the given connection.
@@ -48,7 +47,7 @@ public ChronixClient(TimeSeriesConverter<T> converter, StorageService<T, C, Q> s
 public boolean add(Collection<T> timeSeries, C connection) {
 ```
 
-### Add time series to the storage
+### Stream time series from the storage
 ```java
 /**
 * Creates a stream of time series for the given query context and the connection
