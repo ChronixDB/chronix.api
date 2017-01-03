@@ -24,11 +24,11 @@ package de.qaware.chronix;
 public final class Schema {
 
     /**
-     * The Constant IDX_ID
+     * The id of an document
      */
     public static final String ID = "id";
     /**
-     * The Constant IDX_DATA.
+     * The the data field
      */
     public static final String DATA = "data";
     /**
@@ -40,6 +40,11 @@ public final class Schema {
      * The end as long milliseconds since 1970
      */
     public static final String END = "end";
+
+    /**
+     * The type of the serialized data field
+     */
+    public static final String TYPE = "type";
 
     /**
      * Private constructor
@@ -55,7 +60,7 @@ public final class Schema {
      * @return true if the field is not one of the four required fields, otherwise false.
      */
     public static boolean isUserDefined(String field) {
-        return !(field.equals(ID) || field.equals(DATA) || field.equals(START) || field.equals(END));
+        return !(ID.equals(field) || DATA.equals(field) || START.equals(field) || END.equals(field) || TYPE.equals(field));
     }
 
 }

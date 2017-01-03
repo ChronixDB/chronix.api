@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The binary time series contains at least the required fields (id, start,end,data)
+ * The binary time series contains at least the required fields (id, start, end, data, and type)
  * and an arbitrary list of fields.
  * The data field is a binary large object.
  *
@@ -100,7 +100,7 @@ public final class BinaryTimeSeries {
     /**
      * @param start the start of the data blob
      */
-    public void setStart(long start) {
+    private void setStart(long start) {
         fields.put(Schema.START, start);
     }
 
@@ -108,13 +108,13 @@ public final class BinaryTimeSeries {
      * @return the stat of the data blob
      */
     public long getStart() {
-        return (long) fields.get(Schema.START);
+        return (long) fields.getOrDefault(Schema.START, Long.MIN_VALUE);
     }
 
     /**
      * @param end the end of the data blob
      */
-    public void setEnd(long end) {
+    private void setEnd(long end) {
         fields.put(Schema.END, end);
     }
 
@@ -122,9 +122,19 @@ public final class BinaryTimeSeries {
      * @return the end of the data blob
      */
     public long getEnd() {
-        return (long) fields.get(Schema.END);
+        return (long) fields.getOrDefault(Schema.END, Long.MAX_VALUE);
     }
 
+    /**
+     * @param type sets the type of the serialized data
+     */
+    private void setType(String type) {
+        fields.put(Schema.TYPE, type);
+    }
+
+    public String getType() {
+        return (String) fields.get(Schema.TYPE);
+    }
 
     /**
      * The Builder class
@@ -154,8 +164,8 @@ public final class BinaryTimeSeries {
         /**
          * Objects are mapped to the available data types of solr.
          *
-         * @param field - the field name
-         * @param value - the field value
+         * @param field the field name
+         * @param value the field value
          * @return the builder
          */
         public Builder field(String field, Object value) {
@@ -167,7 +177,7 @@ public final class BinaryTimeSeries {
         /**
          * Sets the points of this time series
          *
-         * @param blob - the binary large object
+         * @param blob the binary large object
          * @return the builder
          */
         public Builder data(byte[] blob) {
@@ -178,7 +188,7 @@ public final class BinaryTimeSeries {
         /**
          * Sets the start of the time series
          *
-         * @param start - the start time stamp
+         * @param start the start time stamp
          * @return the builder
          */
         public Builder start(long start) {
@@ -189,7 +199,7 @@ public final class BinaryTimeSeries {
         /**
          * Sets the end of the time series
          *
-         * @param end - the end time stamp
+         * @param end the end time stamp
          * @return the builder
          */
         public Builder end(long end) {
@@ -200,11 +210,22 @@ public final class BinaryTimeSeries {
         /**
          * Sets the id of this time series. If no id is set, Solr sets the id on the commit
          *
-         * @param guid - the guid as string representation
+         * @param guid the guid as string representation
          * @return the builder
          */
         public Builder id(String guid) {
             binaryTimeSeries.setId(guid);
+            return this;
+        }
+
+        /**
+         * Sets the type of the stored data, e.g. metric, trace, log, ...
+         *
+         * @param type the type
+         * @return the builder
+         */
+        public Builder type(String type) {
+            binaryTimeSeries.setType(type);
             return this;
         }
     }
