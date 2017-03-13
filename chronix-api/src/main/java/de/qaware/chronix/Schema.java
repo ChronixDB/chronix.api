@@ -64,8 +64,11 @@ public final class Schema {
      * @param field - the field name
      * @return true if the field is not one of the four required fields, otherwise false.
      */
+    @SuppressWarnings("all")
     public static boolean isUserDefined(String field) {
-        return !(ID.equals(field) || DATA.equals(field) || START.equals(field) || END.equals(field) || TYPE.equals(field) || NAME.equals(field));
+        return !(ID.equals(field) || DATA.equals(field) ||
+                START.equals(field) || END.equals(field) ||
+                TYPE.equals(field) || NAME.equals(field));
     }
 
 }
