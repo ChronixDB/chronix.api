@@ -39,19 +39,21 @@ class BinaryTimeSeriesTest extends Specification {
                 .end(end)
                 .data("The-Binary-Large-Object".getBytes())
                 .type("String")
+                .name("Name")
                 .field("host", "myProductionHost")
                 .field("size", 0)
                 .build()
 
         then:
         binaryTimeSeries != null
-        binaryTimeSeries.getFields().size() == 7
+        binaryTimeSeries.getFields().size() == 8
 
         binaryTimeSeries.getId() == "6525-9662-2342"
         binaryTimeSeries.getStart() == start
         binaryTimeSeries.getEnd() == end
         binaryTimeSeries.getPoints() == "The-Binary-Large-Object".getBytes()
         binaryTimeSeries.getType() == "String"
+        binaryTimeSeries.getName() == "Name"
         binaryTimeSeries.get("host") == "myProductionHost"
         binaryTimeSeries.get("size") == 0
 
@@ -67,19 +69,21 @@ class BinaryTimeSeriesTest extends Specification {
                 .id("6525-9662-2342")
                 .data("The-Binary-Large-Object".getBytes())
                 .type("String")
+                .name("Name")
                 .field("host", "myProductionHost")
                 .field("size", 0)
                 .build()
 
         then:
         binaryTimeSeries != null
-        binaryTimeSeries.getFields().size() == 5
+        binaryTimeSeries.getFields().size() == 6
 
         binaryTimeSeries.getId() == "6525-9662-2342"
         binaryTimeSeries.getStart() == Long.MIN_VALUE
         binaryTimeSeries.getEnd() == Long.MAX_VALUE
         binaryTimeSeries.getPoints() == "The-Binary-Large-Object".getBytes()
         binaryTimeSeries.getType() == "String"
+        binaryTimeSeries.getName() == "Name"
         binaryTimeSeries.get("host") == "myProductionHost"
         binaryTimeSeries.get("size") == 0
 

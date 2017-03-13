@@ -132,9 +132,27 @@ public final class BinaryTimeSeries {
         fields.put(Schema.TYPE, type);
     }
 
+    /**
+     * @return the type of the time series
+     */
     public String getType() {
         return (String) fields.get(Schema.TYPE);
     }
+
+    /**
+     * @param name of the time series
+     */
+    private void setName(String name) {
+        fields.put(Schema.NAME, name);
+    }
+
+    /**
+     * @return the name of the time series
+     */
+    public String getName() {
+        return (String) fields.get(Schema.NAME);
+    }
+
 
     /**
      * The Builder class
@@ -226,6 +244,18 @@ public final class BinaryTimeSeries {
          */
         public Builder type(String type) {
             binaryTimeSeries.setType(type);
+            return this;
+        }
+
+
+        /**
+         * Sets the type of the stored data, e.g. metric, trace, log, ...
+         *
+         * @param name the type
+         * @return the builder
+         */
+        public Builder name(String name) {
+            binaryTimeSeries.setName(name);
             return this;
         }
     }

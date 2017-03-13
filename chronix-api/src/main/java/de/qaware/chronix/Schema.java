@@ -47,6 +47,11 @@ public final class Schema {
     public static final String TYPE = "type";
 
     /**
+     * Each time series has a name, we call it metric
+     */
+    public static final String NAME = "name";
+
+    /**
      * Private constructor
      */
     private Schema() {
@@ -60,7 +65,7 @@ public final class Schema {
      * @return true if the field is not one of the four required fields, otherwise false.
      */
     public static boolean isUserDefined(String field) {
-        return !(ID.equals(field) || DATA.equals(field) || START.equals(field) || END.equals(field) || TYPE.equals(field));
+        return !(ID.equals(field) || DATA.equals(field) || START.equals(field) || END.equals(field) || TYPE.equals(field) || NAME.equals(field));
     }
 
 }
