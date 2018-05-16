@@ -65,14 +65,18 @@ public Stream<T> stream(C connection, Q query) {..}
 The Chronix-API defines a schema with the minimum required fields.
 ```java
 public final class Schema {
-    //The technical id.
+     /** The id of an document */
     public static final String ID = "id";
-    //The data field.
+    /** The the data field */
     public static final String DATA = "data";
-    //The start of the chunk of time series data as long milliseconds since 1970
+    /** The start as long milliseconds since 1970*/
     public static final String START = "start";
-    //The end of the chunk of time series data as long milliseconds since 1970
+    /** The end as long milliseconds since 1970*/
     public static final String END = "end";
+    /** The type of the serialized data field*/
+    public static final String TYPE = "type";
+    /** Each time series has a name*/
+    public static final String NAME = "name";
 ```
 The schema can be extended with arbitrary used-defined attributes.
 Chronix can also handle collections of primitive data types.
