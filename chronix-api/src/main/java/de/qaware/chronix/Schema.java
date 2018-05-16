@@ -47,7 +47,7 @@ public final class Schema {
     public static final String TYPE = "type";
 
     /**
-     * Each time series has a name, we call it metric
+     * Each time series has a name
      */
     public static final String NAME = "name";
 
